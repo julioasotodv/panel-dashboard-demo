@@ -1,0 +1,42 @@
+{% block javascript %}
+<!-- Bootstrap-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+<!-- Otros javascripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+<!-- Custom javascript para la plantilla usada -->
+<script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.7/js/sb-admin-2.min.js"></script>
+{{ bokeh_js | indent(8) if bokeh_js }}
+
+
+<script>
+    $(document).ready(function () {
+        if ($(window).width() < 768) {
+            $("body").addClass("sidebar-toggled");
+            $(".sidebar").addClass("toggled");
+            if ($(".sidebar").hasClass("toggled")) {
+                $('.sidebar .collapse').collapse('hide');
+            };
+        };
+    });
+
+    $(window).resize(function () {
+        if ($(window).width() < 768) {
+            $("body").addClass("sidebar-toggled");
+            $(".sidebar").addClass("toggled");
+            if ($(".sidebar").hasClass("toggled")) {
+                $('.sidebar .collapse').collapse('hide');
+            };
+        } else {
+            $("body").removeClass("sidebar-toggled");
+            $(".sidebar").removeClass("toggled");
+            if (!$(".sidebar").hasClass("toggled")) {
+                $('.sidebar').collapse('show');
+            };
+        };
+    });
+</script>
+{{ plot_script | indent(8) }}
+{% endblock %}
