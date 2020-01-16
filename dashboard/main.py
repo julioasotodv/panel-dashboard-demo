@@ -32,15 +32,13 @@ def histograma(indices_ciudades):
     mapeo_indices_ciudades = pd.Series({0: "Barcelona", 1: "Madrid"})
     mapeo_ciudades_colores = pd.Series({"Barcelona": "blue", "Madrid": "orange"})
     
-    if len(indices_ciudades) > 0: # Hay filtro:
-        filtrado = tabla[tabla["Ciudad"].isin(mapeo_indices_ciudades[indices_ciudades])]
-        colores = list(mapeo_ciudades_colores[mapeo_indices_ciudades[indices_ciudades]].values)
-
-    else:
-        filtrado = tabla
-        colores = list(mapeo_ciudades_colores[mapeo_indices_ciudades[:]].values)
+    hist = hv.render(tabla.hvplot(kind="hist", by="Ciudad", bins=40, height=400, responsive=True))
     
-    return filtrado.hvplot(kind="hist", by="Ciudad", cmap=colores, bins=40, height=400, responsive=True)
+    if len(indices_ciudades) > 0:
+        for i, renderer in enumerate(hist.renderers):
+            if i not in indices_ciudades:
+                hist.renderers[i].muted=True    
+    return hist
 
 pane_one = pn.pane.HoloViews(burbujas, name="lineas_1")
 pane_two = pn.panel(histograma, name="scatter_1")
