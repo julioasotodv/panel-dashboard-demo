@@ -5,6 +5,9 @@ import hvplot.pandas
 import holoviews as hv
 from bokeh.io import curdoc
 
+renderer = hv.renderer("bokeh").instance(mode='server')
+
+
 tabla = pd.DataFrame({"Ventas": (list(np.random.normal(500, 20, 300)) +
                                  list(np.random.chisquare(32, 450) + 450)),
                       "Ciudad": ["Madrid"] * 300 + ["Barcelona"] * 450
@@ -40,7 +43,7 @@ def histograma(indices_ciudades):
                 hist.renderers[i].muted=True    
     return hist
 
-pane_one = pn.pane.HoloViews(burbujas, name="lineas_1")
+pane_one = pn.pane.Bokeh(renderer.get_plot(burbujas).state, name="lineas_1")
 pane_two = pn.panel(histograma, name="scatter_1")
 
 pane_one.servable()
