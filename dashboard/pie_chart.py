@@ -21,7 +21,7 @@ def create_pie_chart(dataframe, title, palette):
     df_pie_plot["posicion_x_texto"] = radio_tarta * 0.6 * np.cos(df_pie_plot["angulo_bisectriz"])
     df_pie_plot["posicion_y_texto"] = radio_tarta * 0.6 * np.sin(df_pie_plot["angulo_bisectriz"])
 
-    df_pie_plot["color"] = palette[len(df_pie_plot)]
+    df_pie_plot["color"] = palette[:len(df_pie_plot)]
 
     df_pie_plot_source = ColumnDataSource(data=df_pie_plot)
 

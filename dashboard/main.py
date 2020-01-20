@@ -66,6 +66,11 @@ barplot = conteos_mensuales.hvplot(kind="bar",
                                    x="mes",
                                    y="nuevos",
                                    label="Nuevos clientes (total)",
+                                   fill_color=hv.plotting.util.process_cmap("glasbey_cool")[16],
+                                   fill_alpha=0.8,
+                                   hover_fill_alpha=1.0,
+                                   nonselection_fill_alpha=0.2,
+                                   line_color="white",
                                    tools=["tap", barplot_hover, barplot_range_select]
                                    )
 
@@ -82,12 +87,22 @@ barplot_line_hover = HoverTool(tooltips=[("Mes", "@{mes}"),
 lineplot = conteos_activos.hvplot(kind="line",
                                   x="mes",
                                   y="activos",
-                                  cmap="Pastel2",
+                                  line_color="#a7dbd5",
+                                  line_width=3,
                                   label="Nuevos clientes (activos)",
                                   tools=[barplot_line_hover])
 
+# scatter plot (for lines with dots)
+scatter_plot = conteos_activos.hvplot(kind="scatter",
+                                      x="mes",
+                                      y="activos",
+                                      size=60,
+                                      fill_color="#a7dbd5",
+                                      line_color="white",
+                                      label="Nuevos clientes (activos)")
+
 # overlay both glyphs:
-bars_and_lines = (barplot * lineplot)
+bars_and_lines = (barplot * lineplot * scatter_plot)
 
 bars_and_lines.opts(ylim=(0.0, conteos_mensuales["nuevos"].max()*1.5),
                     legend_position="top_right",
@@ -127,6 +142,10 @@ def create_histogram(indices_meses):
         
     hist = df_filtrado.hvplot(kind="hist", 
                               y="saldo",
+                              fill_color=hv.plotting.util.process_cmap("glasbey_cool")[5],
+                              fill_alpha=0.8,
+                              hover_fill_alpha=1.0,
+                              line_color="white",
                               height=400,
                               responsive=True,
                               bins=50)
@@ -164,7 +183,7 @@ def create_piechart(indices_meses):
         meses_titulo = np.array(meses)[sorted(indices_meses)]
         titulo = "Origen: meses %s" % ", ".join(meses_titulo)
 
-    pie_plot_bokeh, _ = create_pie_chart(df_filtrado, titulo, Category20c)
+    pie_plot_bokeh, _ = create_pie_chart(df_filtrado, titulo, hv.plotting.util.process_cmap("glasbey_cool")[4::14])
     pie_plot_bokeh.tools = [tool for tool in pie_plot_bokeh.tools
                             if isinstance(tool, HoverTool)]
     pie_plot_bokeh.toolbar_location = None
