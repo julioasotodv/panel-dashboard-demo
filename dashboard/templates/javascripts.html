@@ -29,13 +29,13 @@
             if ($(".sidebar").hasClass("toggled")) {
                 $('.sidebar .collapse').collapse('hide');
             };
-        } else {
+        } /*else {
             $("body").removeClass("sidebar-toggled");
             $(".sidebar").removeClass("toggled");
             if (!$(".sidebar").hasClass("toggled")) {
                 $('.sidebar').collapse('show');
             };
-        };
+        };*/
     });
 </script>
 {{ plot_script | indent(8) }}

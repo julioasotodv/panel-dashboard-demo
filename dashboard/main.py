@@ -10,6 +10,7 @@ from bokeh.models import (HoverTool,
 from bokeh.palettes import Category20c
 
 import holoviews as hv
+import geoviews as gv
 import hvplot.pandas
 
 import panel as pn
@@ -87,8 +88,7 @@ bars_and_lines.opts(ylim=(0.0, conteos_mensuales["nuevos"].max()*1.5),
                     toolbar="above",
                     xlabel="Mes",
                     ylabel="Clientes",
-                    height=400,
-                    responsive=True
+                    height=400
                     )
 
 # render plot as Bokeh to make further modifications:
@@ -102,6 +102,7 @@ bars_and_lines_bokeh.tools = [tool for tool in bars_and_lines_bokeh.tools
                                       isinstance(tool, WheelZoomTool) or
                                       isinstance(tool, BoxZoomTool))
                              ]
+bars_and_lines_bokeh.sizing_mode = "stretch_width"
 
 
 ## SECOND PLOT: histogram with HvPlot.
@@ -117,12 +118,16 @@ def create_histogram(indices_meses):
     df_filtrado = filtrar_por_indice(df_total, meses, indices_meses)
         
     hist = df_filtrado.hvplot(kind="hist", 
-                              y="saldo", 
-                              bins=50, 
-                              height=400, 
-                              responsive=True)
+                              y="saldo",
+                              height=400,
+                              responsive=True,
+                              bins=50)
+    hist.opts(toolbar="above")
+
+    hist_bokeh = renderer.get_plot(hist).state
+    hist_bokeh.yaxis.axis_label = "Conteo"
     
-    return hist
+    return hist_bokeh
 
 
 ## THIRD PLOT: pie chart (yeah, hate me if you want).
@@ -146,8 +151,31 @@ def create_piechart(indices_meses):
         titulo = "Origen: meses %s" % ", ".join(meses_titulo)
 
     pie_plot_bokeh, _ = create_pie_chart(df_filtrado, titulo, Category20c)
+    pie_plot_bokeh.height = 400
+    pie_plot_bokeh.width = 400
+    pie_plot_bokeh.sizing_mode = "scale_both"
 
     return pie_plot_bokeh
+
+
+## FOURTH PLOT: map
+
+@pn.depends(barplot_selection_stream.param.index)
+def create_map(indices_meses):
+    tiles = gv.tile_sources.CartoLight
+    
+    points = hv.Points(([1,2,3], [4,5,6]))
+
+    map = tiles * points
+
+    map_bokeh = renderer.get_plot(tiles).state
+    map_bokeh.height = 400
+    map_bokeh.width = 580
+    map_bokeh.sizing_mode = "scale_both"
+
+    return map_bokeh
+
+
 
 
 ## CALLBACKS
@@ -198,6 +226,8 @@ pane_histogram = pn.panel(create_histogram,
 pane_pie = pn.panel(create_piechart,
                     name="pie_plot")
 
+pane_map = pn.panel(create_map,
+                    name="map_plot")
 
 ## SERVE ELEMENTS:
 
@@ -205,6 +235,7 @@ pane_month_selector.servable()
 pane_barplot.servable()
 pane_histogram.servable()
 pane_pie.servable()
+pane_map.servable()
 
 ## CHANGE PAGE TITLE:
 
