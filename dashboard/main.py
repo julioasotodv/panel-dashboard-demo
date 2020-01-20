@@ -66,7 +66,6 @@ barplot = conteos_mensuales.hvplot(kind="bar",
                                    x="mes",
                                    y="nuevos",
                                    label="Nuevos clientes (total)",
-                                   #fill_color=hv.plotting.util.process_cmap("glasbey_cool")[16],
                                    fill_color=["#00497c"],
                                    fill_alpha=0.8,
                                    hover_fill_alpha=1.0,
@@ -144,7 +143,6 @@ def create_histogram(indices_meses):
         
     hist = df_filtrado.hvplot(kind="hist", 
                               y="saldo",
-                              #fill_color=hv.plotting.util.process_cmap("glasbey_cool")[5],
                               fill_color="#8ec652",
                               fill_alpha=0.8,
                               hover_fill_alpha=1.0,
@@ -187,8 +185,7 @@ def create_piechart(indices_meses):
         titulo = "Origen: meses %s" % ", ".join(meses_titulo)
 
     pie_plot_bokeh, _ = create_pie_chart(df_filtrado, 
-                                         titulo, 
-                                         #hv.plotting.util.process_cmap("glasbey_cool")[4::14]
+                                         titulo,
                                          ["#2e9186", "#c0a546", "#da8484", "#3f4849"])
     pie_plot_bokeh.tools = [tool for tool in pie_plot_bokeh.tools
                             if isinstance(tool, HoverTool)]
@@ -228,11 +225,10 @@ def create_map(indices_meses):
                 padding=0.1,
                 color="nacionalidad",
                 cmap=["#00497c"],
-                #cmap="glasbey_cool",
                 fill_alpha=0.8,
                 hover_fill_alpha=1.0,
                 line_color="white",
-                line_width=3,
+                line_width=2,
                 show_legend=False,
                 tools=[hover_points])
 

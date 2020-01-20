@@ -18,8 +18,8 @@ def create_pie_chart(dataframe, title, palette):
     df_pie_plot["angulo"] = df_pie_plot["conteo"]/df_pie_plot["conteo"].sum() * 2 * np.pi
     df_pie_plot["angulo_acumulado"] = df_pie_plot["angulo"].cumsum()
     df_pie_plot["angulo_bisectriz"] = df_pie_plot["angulo_acumulado"] - df_pie_plot["angulo"] / 2.0
-    df_pie_plot["posicion_x_texto"] = radio_tarta * 0.6 * np.cos(df_pie_plot["angulo_bisectriz"])
-    df_pie_plot["posicion_y_texto"] = radio_tarta * 0.6 * np.sin(df_pie_plot["angulo_bisectriz"])
+    df_pie_plot["posicion_x_texto"] = radio_tarta * 0.7 * np.cos(df_pie_plot["angulo_bisectriz"])
+    df_pie_plot["posicion_y_texto"] = radio_tarta * 0.7 * np.sin(df_pie_plot["angulo_bisectriz"])
 
     df_pie_plot["color"] = palette[:len(df_pie_plot)]
 
