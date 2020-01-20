@@ -14,5 +14,22 @@
 
     <!-- Custom styles for this template-->
     <link href="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.7/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <style>
+        .buttons-custom {
+            width: auto !important;
+            height: auto !important;
+            position: relative !important;
+        }
+
+        .bk-btn-group {
+            flex-wrap: wrap !important;
+        }
+
+        .bk-btn {
+            flex-grow: 0 !important;
+            -webkit-flex-grow: 0 !important;
+        }
+    </style>
     {{ bokeh_css | indent(8) if bokeh_css }}
 {% endblock %}
