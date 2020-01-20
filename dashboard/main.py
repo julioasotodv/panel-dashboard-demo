@@ -96,7 +96,7 @@ lineplot = conteos_activos.hvplot(kind="line",
 scatter_plot = conteos_activos.hvplot(kind="scatter",
                                       x="mes",
                                       y="activos",
-                                      size=60,
+                                      size=140,
                                       fill_color="#a7dbd5",
                                       line_color="white",
                                       label="Nuevos clientes (activos)")
