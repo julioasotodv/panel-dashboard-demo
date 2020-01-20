@@ -26,7 +26,7 @@ def create_random_dataset():
     df_total = pd.DataFrame(columns=["saldo", "mes", "activo", "origen"])
 
     for i, j in enumerate(meses):
-        n_filas = np.random.randint(150_000, 1_000_000)
+        n_filas = np.random.randint(2_000, 5_000)
         probabilidad_finalizado = np.random.uniform(0,1)
         dict_columnas = dict()
         dict_columnas["saldo"] = np.random.normal(np.random.randint(500, 3000), 
