@@ -142,7 +142,8 @@ def create_histogram(indices_meses):
         
     hist = df_filtrado.hvplot(kind="hist", 
                               y="saldo",
-                              fill_color=hv.plotting.util.process_cmap("glasbey_cool")[5],
+                              #fill_color=hv.plotting.util.process_cmap("glasbey_cool")[5],
+                              fill_color = colorpicker.value,
                               fill_alpha=0.8,
                               hover_fill_alpha=1.0,
                               line_color="white",
@@ -279,7 +280,11 @@ month_selector.param.watch(fn=mark_selection_in_barplot,
 ## BIND ELEMENTS (WIDGETS + CHARTS)
 ## TO PANEL SERVER AND HTML UI
 
+
+colorpicker = pn.widgets.ColorPicker(name='Color Picker', value='#99ef78')
+
 pane_month_selector = pn.Row(month_selector,
+                             colorpicker,
                              name="month_selector_widget",
                              css_classes=["buttons-custom"])
 
