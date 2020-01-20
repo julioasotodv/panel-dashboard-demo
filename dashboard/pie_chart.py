@@ -36,6 +36,7 @@ def create_pie_chart(dataframe, title, palette):
                                     start_angle=bokeh_cumsum("angulo", include_zero=True), 
                                     end_angle=bokeh_cumsum('angulo'),
                                     line_color="white", 
+                                    line_width=3,
                                     fill_color='color',
                                     #legend_field="origen",
                                     alpha=0.8,
@@ -52,8 +53,16 @@ def create_pie_chart(dataframe, title, palette):
                                  text_baseline="middle",
                                  source=df_pie_plot_source)
 
-    hover_pie = HoverTool(tooltips="@{origen}: @{conteo}",
+    # Old hover:
+    #hover_pie = HoverTool(tooltips="@{origen}: @{conteo}",
+    #                      renderers=[sectores])
+
+    # New hover:
+    hover_pie = HoverTool(tooltips=[("Origen", "@{origen}"),
+                                    ("Clientes", "@{conteo}"),
+                                    ("Porcentaje", "@{porcentaje}")],
                           renderers=[sectores])
+
     pie_plot_bokeh.add_tools(hover_pie)
 
     pie_plot_bokeh.axis.axis_label=None

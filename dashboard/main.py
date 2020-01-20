@@ -15,7 +15,7 @@ import hvplot.pandas
 
 import panel as pn
 
-from data import df_total, conteos_mensuales, conteos_activos, meses, origenes
+from data import df_total, conteos_mensuales, conteos_activos, meses, origenes, countries_df
 from pie_chart import create_pie_chart
 
 
@@ -33,6 +33,12 @@ def filtrar_por_indice(df, meses, indices):
     else:
         df_filtrado = df
     return df_filtrado
+
+# Helper function for scatter dot size
+def scale_size(sizes, min_size, max_size):
+    scale = (max_size - min_size) / (np.array(sizes).max() - np.array(sizes).min())
+    escalados = scale * np.array(sizes) + min_size - np.array(sizes).min() * scale
+    return escalados
 
 
 ## FIRST WIDGET: a simple month selector.
@@ -103,6 +109,8 @@ bars_and_lines_bokeh.tools = [tool for tool in bars_and_lines_bokeh.tools
                                       isinstance(tool, BoxZoomTool))
                              ]
 bars_and_lines_bokeh.sizing_mode = "stretch_width"
+bars_and_lines_bokeh.outline_line_color = None
+
 
 
 ## SECOND PLOT: histogram with HvPlot.
@@ -126,6 +134,12 @@ def create_histogram(indices_meses):
 
     hist_bokeh = renderer.get_plot(hist).state
     hist_bokeh.yaxis.axis_label = "Conteo"
+
+    hist_bokeh.tools = [tool for tool in hist_bokeh.tools
+                        if isinstance(tool, HoverTool)]
+
+    hist_bokeh.toolbar_location = None
+    hist_bokeh.outline_line_color = None
     
     return hist_bokeh
 
@@ -151,6 +165,10 @@ def create_piechart(indices_meses):
         titulo = "Origen: meses %s" % ", ".join(meses_titulo)
 
     pie_plot_bokeh, _ = create_pie_chart(df_filtrado, titulo, Category20c)
+    pie_plot_bokeh.tools = [tool for tool in pie_plot_bokeh.tools
+                            if isinstance(tool, HoverTool)]
+    pie_plot_bokeh.toolbar_location = None
+    pie_plot_bokeh.outline_line_color = None
     pie_plot_bokeh.height = 400
     pie_plot_bokeh.width = 400
     pie_plot_bokeh.sizing_mode = "scale_both"
@@ -162,13 +180,42 @@ def create_piechart(indices_meses):
 
 @pn.depends(barplot_selection_stream.param.index)
 def create_map(indices_meses):
-    tiles = gv.tile_sources.CartoLight
+    df_filtrado = filtrar_por_indice(df_total, meses, indices_meses)
+
+    df_agregado = df_filtrado.groupby("nacionalidad").size().reset_index()
+    df_agregado.columns = ["nacionalidad", "conteo"]
+
+    df_map = df_agregado.merge(countries_df,
+                               how="inner",
+                               left_on=["nacionalidad"],
+                               right_on=["country_spanish"])
+
+    df_map["tamaño"] = scale_size(df_map["conteo"], 10, 60).astype("int")
+
+    hover_points = HoverTool(tooltips=[("Nacionalidad", "@{nacionalidad}"),
+                                       ("Nº Clienes", "@{conteo}")])
     
-    points = hv.Points(([1,2,3], [4,5,6]))
+    points = gv.Points(df_map,
+                       kdims=["Capital Longitude", "Capital Latitude"],
+                       vdims=["nacionalidad", "conteo", "tamaño"])
+
+    points.opts(size="tamaño",
+                padding=0.1,
+                color="nacionalidad",
+                cmap="glasbey_cool",
+                fill_alpha=0.8,
+                hover_fill_alpha=1.0,
+                line_color="white",
+                line_width=3,
+                show_legend=False,
+                tools=[hover_points])
+
+    tiles = gv.tile_sources.CartoLight
 
     map = tiles * points
 
-    map_bokeh = renderer.get_plot(tiles).state
+    map_bokeh = renderer.get_plot(map).state
+    map_bokeh.toolbar.autohide = True
     map_bokeh.height = 400
     map_bokeh.width = 580
     map_bokeh.sizing_mode = "scale_both"
