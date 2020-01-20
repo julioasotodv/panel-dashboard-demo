@@ -66,7 +66,8 @@ barplot = conteos_mensuales.hvplot(kind="bar",
                                    x="mes",
                                    y="nuevos",
                                    label="Nuevos clientes (total)",
-                                   fill_color=hv.plotting.util.process_cmap("glasbey_cool")[16],
+                                   #fill_color=hv.plotting.util.process_cmap("glasbey_cool")[16],
+                                   fill_color=["#00497c"],
                                    fill_alpha=0.8,
                                    hover_fill_alpha=1.0,
                                    nonselection_fill_alpha=0.2,
@@ -99,7 +100,8 @@ scatter_plot = conteos_activos.hvplot(kind="scatter",
                                       size=140,
                                       fill_color="#a7dbd5",
                                       line_color="white",
-                                      label="Nuevos clientes (activos)")
+                                      label="Nuevos clientes (activos)",
+                                      hover=False)
 
 # overlay both glyphs:
 bars_and_lines = (barplot * lineplot * scatter_plot)
@@ -143,7 +145,7 @@ def create_histogram(indices_meses):
     hist = df_filtrado.hvplot(kind="hist", 
                               y="saldo",
                               #fill_color=hv.plotting.util.process_cmap("glasbey_cool")[5],
-                              fill_color = colorpicker.value,
+                              fill_color="#8ec652",
                               fill_alpha=0.8,
                               hover_fill_alpha=1.0,
                               line_color="white",
@@ -184,7 +186,10 @@ def create_piechart(indices_meses):
         meses_titulo = np.array(meses)[sorted(indices_meses)]
         titulo = "Origen: meses %s" % ", ".join(meses_titulo)
 
-    pie_plot_bokeh, _ = create_pie_chart(df_filtrado, titulo, hv.plotting.util.process_cmap("glasbey_cool")[4::14])
+    pie_plot_bokeh, _ = create_pie_chart(df_filtrado, 
+                                         titulo, 
+                                         #hv.plotting.util.process_cmap("glasbey_cool")[4::14]
+                                         ["#2e9186", "#c0a546", "#da8484", "#3f4849"])
     pie_plot_bokeh.tools = [tool for tool in pie_plot_bokeh.tools
                             if isinstance(tool, HoverTool)]
     pie_plot_bokeh.toolbar_location = None
@@ -222,7 +227,8 @@ def create_map(indices_meses):
     points.opts(size="tamaño",
                 padding=0.1,
                 color="nacionalidad",
-                cmap="glasbey_cool",
+                cmap=["#00497c"],
+                #cmap="glasbey_cool",
                 fill_alpha=0.8,
                 hover_fill_alpha=1.0,
                 line_color="white",
@@ -237,7 +243,7 @@ def create_map(indices_meses):
     map_bokeh = renderer.get_plot(map).state
     map_bokeh.toolbar.autohide = True
     map_bokeh.height = 400
-    map_bokeh.width = 580
+    map_bokeh.width = 780
     map_bokeh.sizing_mode = "scale_both"
 
     return map_bokeh
@@ -280,11 +286,7 @@ month_selector.param.watch(fn=mark_selection_in_barplot,
 ## BIND ELEMENTS (WIDGETS + CHARTS)
 ## TO PANEL SERVER AND HTML UI
 
-
-colorpicker = pn.widgets.ColorPicker(name='Color Picker', value='#99ef78')
-
 pane_month_selector = pn.Row(month_selector,
-                             colorpicker,
                              name="month_selector_widget",
                              css_classes=["buttons-custom"])
 

@@ -30,19 +30,20 @@ def create_pie_chart(dataframe, title, palette):
                             x_range=(-0.45, 0.45),
                             y_range=(-0.45, 0.45))
 
-    sectores = pie_plot_bokeh.wedge(x=0, 
-                                    y=0, 
-                                    radius=radio_tarta,
-                                    start_angle=bokeh_cumsum("angulo", include_zero=True), 
-                                    end_angle=bokeh_cumsum('angulo'),
-                                    line_color="white", 
-                                    line_width=3,
-                                    fill_color='color',
-                                    #legend_field="origen",
-                                    alpha=0.8,
-                                    hover_color="color",
-                                    hover_alpha=1.0,
-                                    source=df_pie_plot_source)
+    sectores = pie_plot_bokeh.annular_wedge(x=0, 
+                                            y=0, 
+                                            inner_radius=radio_tarta / 3.0,
+                                            outer_radius=radio_tarta,
+                                            start_angle=bokeh_cumsum("angulo", include_zero=True), 
+                                            end_angle=bokeh_cumsum('angulo'),
+                                            line_color="white", 
+                                            line_width=3,
+                                            fill_color='color',
+                                            #legend_field="origen",
+                                            alpha=0.8,
+                                            hover_color="color",
+                                            hover_alpha=1.0,
+                                            source=df_pie_plot_source)
     
     textos = pie_plot_bokeh.text(x='posicion_x_texto', 
                                  y='posicion_y_texto', 
