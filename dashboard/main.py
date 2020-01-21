@@ -102,7 +102,7 @@ scatter_plot = conteos_activos.hvplot(kind="scatter",
                                       label="Nuevos clientes (activos)",
                                       hover=False)
 
-# overlay both glyphs:
+# overlay the three glyphs:
 bars_and_lines = (barplot * lineplot * scatter_plot)
 
 bars_and_lines.opts(ylim=(0.0, conteos_mensuales["nuevos"].max()*1.5),
