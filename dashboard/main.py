@@ -110,7 +110,8 @@ bars_and_lines.opts(ylim=(0.0, conteos_mensuales["nuevos"].max()*1.5),
                     toolbar="above",
                     xlabel="Mes",
                     ylabel="Clientes",
-                    height=400
+                    height=400,
+                    width=900
                     )
 
 # render plot as Bokeh to make further modifications:
@@ -124,7 +125,7 @@ bars_and_lines_bokeh.tools = [tool for tool in bars_and_lines_bokeh.tools
                                       isinstance(tool, WheelZoomTool) or
                                       isinstance(tool, BoxZoomTool))
                              ]
-bars_and_lines_bokeh.sizing_mode = "stretch_width"
+bars_and_lines_bokeh.sizing_mode = "scale_both"
 bars_and_lines_bokeh.outline_line_color = None
 
 
@@ -148,7 +149,7 @@ def create_histogram(indices_meses):
                               hover_fill_alpha=1.0,
                               line_color="white",
                               height=400,
-                              responsive=True,
+                              width=625,
                               bins=50)
     hist.opts(toolbar="above")
 
@@ -157,6 +158,8 @@ def create_histogram(indices_meses):
 
     hist_bokeh.tools = [tool for tool in hist_bokeh.tools
                         if isinstance(tool, HoverTool)]
+
+    hist_bokeh.sizing_mode = "scale_both"
 
     hist_bokeh.toolbar_location = None
     hist_bokeh.outline_line_color = None
@@ -262,6 +265,7 @@ def mark_selection_in_barplot(*events):
         seleccionado = event.new
         seleccionados = list(mapping.loc[seleccionado].values)
         bars_and_lines_bokeh.renderers[0].data_source.selected.indices = seleccionados
+        bars_and_lines_bokeh.renderers[2].data_source.selected.indices = seleccionados
         # Replacing the previous line with the following one will also work (will trigger 
         # new hist and pie plot), but it won't update visually what is selected in 
         # the barplot:

@@ -26,7 +26,6 @@ def create_pie_chart(dataframe, title, palette):
     df_pie_plot_source = ColumnDataSource(data=df_pie_plot)
 
     pie_plot_bokeh = Figure(title=title,
-                            #toolbar_location=None,
                             x_range=(-0.45, 0.45),
                             y_range=(-0.45, 0.45))
 
