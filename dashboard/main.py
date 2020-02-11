@@ -125,7 +125,7 @@ bars_and_lines_bokeh.tools = [tool for tool in bars_and_lines_bokeh.tools
                                       isinstance(tool, WheelZoomTool) or
                                       isinstance(tool, BoxZoomTool))
                              ]
-bars_and_lines_bokeh.sizing_mode = "scale_both"
+bars_and_lines_bokeh.sizing_mode = "stretch_both"
 bars_and_lines_bokeh.outline_line_color = None
 
 
