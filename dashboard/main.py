@@ -22,7 +22,6 @@ from pie_chart import create_pie_chart
 # Set HoloViews renderer for Bokeh:
 renderer = hv.renderer("bokeh").instance(mode='server')
 
-
 # Helper function to map bar indices to months
 # in the first chart we will create below:
 def filtrar_por_indice(df, meses, indices):
