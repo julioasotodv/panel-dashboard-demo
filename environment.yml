@@ -1,4 +1,5 @@
 channels:
+  - bokeh
   - conda-forge
 dependencies:
   - python=3.8
