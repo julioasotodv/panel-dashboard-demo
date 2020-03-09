@@ -1,10 +1,9 @@
 channels:
-  - bokeh
   - conda-forge
 dependencies:
   - python=3.8
   - pandas 
-  - bokeh>=2.0.0
+  - bokeh
   - holoviews 
   - hvplot 
   - geoviews 
