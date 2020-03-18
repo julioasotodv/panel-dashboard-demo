@@ -234,8 +234,8 @@ def create_map(indices_meses):
                 show_legend=False,
                 tools=[hover_points])
 
-    tiles = gv.tile_sources.WMTS("https://b.basemaps.cartocdn.com/light_nolabels/{Z}/{X}/{Y}@2x.png", name="Carto_light_Nolabels")
-    #tiles = gv.tile_sources.WMTS("https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{Z}/{X}/{Y}@2x.png", name="Alidade_Smooth_Dark")
+    #tiles = gv.tile_sources.WMTS("https://b.basemaps.cartocdn.com/light_nolabels/{Z}/{X}/{Y}@2x.png", name="Carto_light_Nolabels")
+    tiles = gv.tile_sources.WMTS("https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{Z}/{X}/{Y}@2x.png", name="Alidade_Smooth_Dark")
 
     map = tiles * points
 
