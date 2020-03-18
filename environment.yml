@@ -3,7 +3,7 @@ channels:
 dependencies:
   - python
   - pandas 
-  - bokeh
+  - bokeh==1.4.0
   - holoviews 
   - hvplot 
   - geoviews 
