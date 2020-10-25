@@ -1,16 +1,19 @@
 channels:
-  - pyviz
   - conda-forge
 dependencies:
-  - python
-  - pandas 
-  - bokeh==1.4.0
-  - holoviews 
-  - hvplot 
-  - geoviews 
-  - datashader 
-  - colorcet 
-  - panel
+  - python==3.8.6
+  - matplotlib==3.3.2
+  - pandas==1.1.3
+  - fastparquet==0.4.1
+  - dask==2.30.0
+  - distributed==2.30.0
+  - bokeh==2.1.1
+  - holoviews==1.13.4
+  - hvplot==0.6.0
+  - geoviews==1.8.2
+  - datashader==0.11.1
+  - colorcet==2.0.1
+  - panel==0.9.7
   - pip
   - pip:
     - jupyter-server-proxy
