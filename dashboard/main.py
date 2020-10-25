@@ -158,7 +158,7 @@ def create_histogram(indices_meses):
     hist_bokeh.tools = [tool for tool in hist_bokeh.tools
                         if isinstance(tool, HoverTool)]
 
-    hist_bokeh.sizing_mode = "scale_both"
+    hist_bokeh.sizing_mode = "stretch_both"
 
     hist_bokeh.toolbar_location = None
     hist_bokeh.outline_line_color = None
