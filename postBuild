@@ -1,5 +1,5 @@
-# enable nbserverproxy
-jupyter serverextension enable --sys-prefix nbserverproxy
+# activate jupyter_server_proxy
+jupyter serverextension enable --sys-prefix jupyter_server_proxy
 
 # install the bokeh server extension so that
 # bokeh launches at startup
