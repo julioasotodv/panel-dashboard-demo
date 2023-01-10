@@ -128,7 +128,6 @@ dependencies:
   - libssh2=1.10.0
   - libtiff=4.4.0
   - libwebp-base=1.2.4
-  - libxcb=1.13
   - libxml2=2.9.14
   - libzip=1.9.2
   - libzlib=1.2.13
