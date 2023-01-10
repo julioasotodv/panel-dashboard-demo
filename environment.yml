@@ -18,3 +18,4 @@ dependencies:
   - panel==0.9.7
   - jinja2==2.11.3
   - jupyter-server-proxy==3.2.2
+
