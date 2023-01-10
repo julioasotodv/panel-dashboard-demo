@@ -16,6 +16,4 @@ dependencies:
   - colorcet==2.0.1
   - panel==0.9.7
   - jinja2==2.11.3
-  - pip
-  - pip:
-    - jupyter-server-proxy
+  - jupyter-server-proxy==3.2.2
