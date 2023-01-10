@@ -122,7 +122,6 @@ dependencies:
   - pillow=9.2.0
   - pixman=0.40.0
   - pooch=1.6.0
-  - poppler-data=0.4.11
   - postgresql=13.5
   - proj=8.1.1
   - pthread-stubs=0.4
