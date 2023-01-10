@@ -38,8 +38,6 @@ dependencies:
   - font-ttf-source-code-pro=2.038
   - font-ttf-ubuntu=0.83
   - fontconfig=2.14.1
-  - fonts-conda-ecosystem=1
-  - fonts-conda-forge=1
   - freetype=2.12.1
   - freexl=1.0.6
   - frozenlist=1.3.3
