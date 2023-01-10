@@ -202,7 +202,7 @@ def create_piechart(indices_meses):
 
 ## FOURTH PLOT: map
 
-@pn.depends(barplot_selection_stream.param.index)
+#@pn.depends(barplot_selection_stream.param.index)
 def create_map(indices_meses):
     df_filtrado = filtrar_por_indice(df_total, meses, indices_meses)
 
@@ -299,8 +299,8 @@ pane_histogram = pn.panel(create_histogram,
 pane_pie = pn.panel(create_piechart,
                     name="pie_plot")
 
-pane_map = pn.panel(create_map,
-                    name="map_plot")
+#pane_map = pn.panel(create_map,
+#                    name="map_plot")
 
 ## SERVE ELEMENTS:
 
