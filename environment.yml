@@ -53,7 +53,7 @@ dependencies:
   - executing=1.2.0
   - expat=2.5.0
   - fastparquet=0.4.1
-  - fiona=1.6.4
+  - fiona=1.8.20
   - flit-core=3.8.0
   - folium=0.14.0
   - fontconfig=2.14.1
