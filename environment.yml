@@ -83,7 +83,7 @@ dependencies:
   - importlib_metadata=6.0.0
   - importlib_resources=5.10.2
   - ipykernel=6.19.4
-  - ipython=8.8.0
+  - ipython=8.7.0
   - ipython_genutils=0.2.0
   - jedi=0.18.2
   - jinja2=2.11.3
@@ -128,7 +128,6 @@ dependencies:
   - libssh2=1.10.0
   - libtiff=4.4.0
   - libwebp-base=1.2.4
-  - libxcb=1.13
   - libxml2=2.9.14
   - libzip=1.9.2
   - libzlib=1.2.13
