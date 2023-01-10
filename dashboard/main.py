@@ -308,7 +308,7 @@ pane_month_selector.servable()
 pane_barplot.servable()
 pane_histogram.servable()
 pane_pie.servable()
-pane_map.servable()
+#pane_map.servable()
 
 ## CHANGE PAGE TITLE:
 
