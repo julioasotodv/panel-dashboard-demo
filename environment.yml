@@ -53,6 +53,7 @@ dependencies:
   - executing=1.2.0
   - expat=2.5.0
   - fastparquet=0.4.1
+  - fiona=1.8.20
   - flit-core=3.8.0
   - folium=0.14.0
   - fontconfig=2.14.1
@@ -62,13 +63,11 @@ dependencies:
   - fsspec=2022.11.0
   - geopandas=0.12.2
   - geopandas-base=0.12.2
-  - geos=3.10.0
   - geotiff=1.7.0
   - geoviews=1.8.2
   - geoviews-core=1.8.2
   - gettext=0.21.1
   - giflib=5.2.1
-  - glib=2.68.4
   - hdf4=4.2.15
   - hdf5=1.12.1
   - heapdict=1.0.1
@@ -175,7 +174,6 @@ dependencies:
   - platformdirs=2.6.2
   - pooch=1.6.0
   - postgresql=13.5
-  - proj=8.1.1
   - prometheus_client=0.15.0
   - prompt-toolkit=3.0.36
   - psutil=5.9.4
@@ -220,7 +218,6 @@ dependencies:
   - testpath=0.6.0
   - threadpoolctl=3.1.0
   - thrift=0.11.0
-  - tiledb=2.3.4
   - tk=8.6.12
   - toolz=0.12.0
   - tornado=6.1
